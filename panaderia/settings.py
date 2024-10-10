@@ -1,3 +1,4 @@
+from .config import DATABASES
 """
 Django settings for panaderia project.
 
@@ -37,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'psycopg2',
+    'productos',
+    'ventas',
+    'recepciones',
+    'insumos',
+
 ]
 
 MIDDLEWARE = [
@@ -73,12 +81,7 @@ WSGI_APPLICATION = 'panaderia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = DATABASES
 
 
 # Password validation

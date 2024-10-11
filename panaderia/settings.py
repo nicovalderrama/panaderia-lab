@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'ventas',
     'recepciones',
     'insumos',
-
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -105,9 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ALLOW_ALL_ORIGINS = [
-    'http://localhost:3000',
-]
+CORS_ALLOW_ALL_ORIGINS = True
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 

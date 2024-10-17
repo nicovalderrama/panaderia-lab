@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'psycopg2',
-    'productos',
-    'ventas',
-    'recepciones',
-    'insumos',
+    'app.productos',
+    'app.ventas',
+    'app.recepciones',
+    'app.insumos',
     'api',
 ]
 

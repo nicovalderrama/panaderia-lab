@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from insumos.views import InsumoViewSet,ProveedorViewSet,ItemPedidoViewSet,PedidoViewSet
-from productos.views import ProductoViewSet,ItemVentaViewSet
+from app.insumos.views import InsumoViewSet,ProveedorViewSet,ItemPedidoViewSet,PedidoViewSet
+from app.productos.views import ProductoViewSet
+from app.ventas.views import ItemVentaViewSet,VentaViewSet, ClienteViewSet
 
 router = DefaultRouter()
 router.register(r"insumos",InsumoViewSet)
@@ -27,7 +30,11 @@ router.register(r"item-pedido",ItemPedidoViewSet)
 router.register(r"pedido",PedidoViewSet)
 router.register(r"productos",ProductoViewSet)
 router.register(r"item-venta",ItemVentaViewSet)
+router.register(r"venta",VentaViewSet)
+router.register(r"cliente",ClienteViewSet)
+# router.register(r"producto/nuevo", ProductoCreateView)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(router.urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

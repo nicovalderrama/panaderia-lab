@@ -1,4 +1,6 @@
+import os
 from .config import DATABASES
+
 """
 Django settings for panaderia project.
 
@@ -42,10 +44,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'psycopg2',
-    'productos',
-    'ventas',
-    'recepciones',
-    'insumos',
+    'app.productos',
+    'app.ventas',
+    'app.recepciones',
+    'app.insumos',
     'api',
 ]
 
@@ -117,7 +119,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 

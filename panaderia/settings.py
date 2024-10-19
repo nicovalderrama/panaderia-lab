@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'psycopg2',
     'app.productos',
     'app.ventas',
-    'app.recepciones',
     'app.insumos',
     'api',
 ]

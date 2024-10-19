@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Proveedor,Insumo,ItemPedido,Pedido
+from .models import Proveedor,Insumo,ItemPedido,Pedido, RecepcionPedido
 
 class ProveedorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,4 +24,15 @@ class ItemPedidoSerializer(serializers.ModelSerializer):
         model = ItemPedido
         fields = ("id","insumo","cantidad","pedido")
         read_only_fields = ["id"]
-    
+
+class RecepcionPedidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RecepcionPedido
+        fields = ("id", "pedido","fecha_recepcion","observaciones")
+        read_only_fields = "id"
+
+class ItemRecepcionPedidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RecepcionPedido
+        fields = ("id", "insumo", "cantidad_recibida","recepcion_pedido")
+        read_only_fields = "id"

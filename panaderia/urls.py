@@ -22,6 +22,8 @@ from rest_framework.routers import DefaultRouter
 from app.insumos.views import InsumoViewSet,ProveedorViewSet,ItemPedidoViewSet,PedidoViewSet
 from app.productos.views import ProductoViewSet
 from app.ventas.views import ItemVentaViewSet,VentaViewSet, ClienteViewSet
+from usuarios.views import UsuarioViewSet, CustomTokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()
 router.register(r"insumos",InsumoViewSet)
@@ -32,9 +34,14 @@ router.register(r"productos",ProductoViewSet)
 router.register(r"item-venta",ItemVentaViewSet)
 router.register(r"venta",VentaViewSet)
 router.register(r"cliente",ClienteViewSet)
+router.register(r'usuarios',UsuarioViewSet)
 # router.register(r"producto/nuevo", ProductoCreateView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/usuarios/', UsuarioViewSet.as_view({'get': 'list'})),
+    path('api/usuarios/<int:pk>/', UsuarioViewSet.as_view({'get': 'retrieve'})),
     path('',include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

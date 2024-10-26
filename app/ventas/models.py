@@ -15,6 +15,7 @@ class Venta(models.Model):
     forma_pago = models.CharField(max_length=50)
     tipo_comprobante = models.CharField(max_length=50)
     numero_comprobante = models.CharField(max_length=50)
+    total_monto_venta = models.FloatField(max_length=50)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     
 class ItemVenta(models.Model):

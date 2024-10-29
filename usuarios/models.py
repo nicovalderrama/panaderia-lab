@@ -13,6 +13,7 @@ class CustomUser(AbstractUser):
 
 class Empleado(models.Model):
     nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100, null=True, blank=True)
     cuit = models.CharField(max_length=50)
     direccion = models.CharField(max_length=255)
     telefono = models.CharField(max_length=20)

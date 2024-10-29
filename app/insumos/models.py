@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from usuarios.models import Empleado
 
 User = get_user_model()
 
@@ -17,6 +18,12 @@ class Insumo(models.Model):
     proveedor_frecuente = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 
 class Pedido(models.Model):
+    ESTADO_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('recibido', 'Recibido'),
+    ]
+
+    estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
     fecha_solicitud = models.DateField(auto_now_add=True)
     numero_pedido = models.CharField(max_length=50, unique=True)
     observaciones = models.TextField(null=True, blank=True)
@@ -40,5 +47,5 @@ class ItemPedido(models.Model):
 class RecepcionPedido(models.Model):
     pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
     fecha_recepcion = models.DateField(auto_now_add=True)
-    recibido_por = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    recibido_por = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True)
     observaciones = models.TextField(null=True, blank=True)

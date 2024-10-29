@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
-from .models import Proveedor,Insumo,ItemPedido,Pedido
-from .serializer import ProveedorSerializer,InsumoSerializer,ItemPedidoSerializer,PedidoSerializer
+from .models import Proveedor,Insumo,ItemPedido,Pedido,RecepcionPedido
+from .serializer import  *
+
 
 class ProveedorViewSet(viewsets.ModelViewSet):
     queryset = Proveedor.objects.all()
@@ -36,4 +37,7 @@ class PedidoViewSet(viewsets.ModelViewSet):
         'numero_pedido': pedido.numero_pedido,
     })
 
-
+class RecepcionPedidoViewSet(viewsets.ModelViewSet):
+    queryset = RecepcionPedido.objects.all()
+    serializer_class = RecepcionPedidoSerializer
+    permission_classes = [permissions.AllowAny]

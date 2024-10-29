@@ -5,7 +5,7 @@ from django.db import transaction
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ("nombre_completo", "telefono","direccion","tipo_cliente")
+        fields = ("nombre_completo", "telefono","direccion","tipo_cliente", "id")
        
 class ItemVentaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,7 +18,7 @@ class VentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venta
         fields = ['fecha_venta', 'tipo_venta', 'forma_pago', 'tipo_comprobante', 'numero_comprobante', 'cliente', 'items']
-
+#falta usuario que hizo la venta en venta
     def create(self, validated_data):
         items_data = validated_data.pop('items')  # Extraemos los items del validated_data
 

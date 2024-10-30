@@ -16,10 +16,11 @@ class Venta(models.Model):
     tipo_comprobante = models.CharField(max_length=50)
     numero_comprobante = models.CharField(max_length=50)
     total_monto_venta = models.FloatField(max_length=50)
+    user_name_venta = models.CharField(max_length=50)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     
 class ItemVenta(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    venta = models.ForeignKey(Venta, on_delete=models.CASCADE)
+    venta = models.ForeignKey(Venta, on_delete=models.CASCADE, related_name='items')
     cantidad = models.IntegerField()
     monto_total = models.DecimalField(max_digits=10, decimal_places=2)

@@ -19,11 +19,11 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from app.insumos.views import InsumoViewSet,ProveedorViewSet,ItemPedidoViewSet,PedidoViewSet
+from app.insumos.views import InsumoViewSet,ProveedorViewSet,ItemPedidoViewSet,PedidoViewSet,RecepcionPedidoViewSet
 from app.productos.views import ProductoViewSet
 from app.ventas.views import ItemVentaViewSet,VentaViewSet, ClienteViewSet
-from usuarios.views import UsuarioViewSet, CustomTokenObtainPairView
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from usuarios.views import UsuarioViewSet, CustomTokenObtainPairView, EmpleadoViewSet
+from rest_framework_simplejwt.views import TokenRefreshView
 
 router = DefaultRouter()
 router.register(r"insumos",InsumoViewSet)
@@ -34,7 +34,9 @@ router.register(r"productos",ProductoViewSet)
 router.register(r"item-venta",ItemVentaViewSet)
 router.register(r"venta",VentaViewSet)
 router.register(r"cliente",ClienteViewSet)
+router.register(r"empleado",EmpleadoViewSet)
 router.register(r'usuarios',UsuarioViewSet)
+router.register(r"recepcion-pedido",RecepcionPedidoViewSet)
 # router.register(r"producto/nuevo", ProductoCreateView)
 
 urlpatterns = [

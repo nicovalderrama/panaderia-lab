@@ -23,4 +23,6 @@ class ItemVenta(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     venta = models.ForeignKey(Venta, on_delete=models.CASCADE, related_name='items')
     cantidad = models.IntegerField()
+    producto_precio_unidad = models.DecimalField(max_digits=10, decimal_places=2)
+    tipo_precio = models.CharField(max_length=10)
     monto_total = models.DecimalField(max_digits=10, decimal_places=2)

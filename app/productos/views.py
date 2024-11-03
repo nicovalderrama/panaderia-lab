@@ -5,7 +5,7 @@ from .models import Producto
 from .serializer import ProductoSerializer
 # Create your views here.
 class ProductoViewSet(viewsets.ModelViewSet):
-    queryset = Producto.objects.all()
+    queryset = Producto.objects.filter(isDeleted = False)
     serializer_class = ProductoSerializer
     permission_classes = [permissions.AllowAny]
 

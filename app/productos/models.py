@@ -10,3 +10,8 @@ class Producto(models.Model):
     unidad = models.CharField(max_length=10)
     categoria = models.CharField(max_length=50)
     imagen = models.ImageField(upload_to='productos/', null=True, blank=True)
+    isDeleted = models.BooleanField(default=False)
+    
+    def delete(self, *args, **kwargs):
+        self.isDeleted = True
+        self.save()   

@@ -20,7 +20,7 @@ class ItemPedidoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ItemPedido
-        fields = ["id", "insumo_id", "insumo", "cantidad","pedido_id"]
+        fields = ["insumo_id", "cantidad","insumo"]
 class PedidoSerializer(serializers.ModelSerializer):
     items = ItemPedidoSerializer(many=True)
 
@@ -30,6 +30,7 @@ class PedidoSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'numero_pedido', 'fecha_solicitud']
 
     def create(self, validated_data):
+        print('--->', validated_data)
         items_data = validated_data.pop('items')
         
         with transaction.atomic():

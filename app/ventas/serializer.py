@@ -10,17 +10,22 @@ class ClienteSerializer(serializers.ModelSerializer):
 class ItemVentaSerializer(serializers.ModelSerializer):
     producto_id = serializers.IntegerField(write_only=True)
     producto_nombre = serializers.SerializerMethodField(read_only=True)
-    producto_precio = serializers.SerializerMethodField(read_only=True)
+    producto_categoria = serializers.SerializerMethodField(read_only=True)
+    # producto_precio = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = ItemVenta
-        fields = ['producto_id', 'producto_nombre', 'producto_precio', 'cantidad', 'monto_total']
+        fields =  fields = ['producto_id', 'producto_nombre', 'producto_categoria', 'cantidad', 'monto_total', 'producto_precio_unidad', 'tipo_precio']
 
     def get_producto_nombre(self, obj):
         return obj.producto.nombre  
 
-    def get_producto_precio(self, obj):
-        return obj.producto.precio 
+    def get_producto_precio_mayorista(self, obj):
+        return obj.producto.precio_mayorista
+    def get_producto_precio_lista(self, obj):
+        return obj.producto.precio_lista
+    def get_producto_categoria(self, obj):
+        return obj.producto.categoria
 
 class VentaSerializer(serializers.ModelSerializer):
     items = ItemVentaSerializer(many=True)

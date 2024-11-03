@@ -24,18 +24,23 @@ class InsumoViewSet(viewsets.ModelViewSet):
 class ItemPedidoViewSet(viewsets.ModelViewSet):
     queryset = ItemPedido.objects.all()
     permission_classes = [permissions.AllowAny]
-    serializer_class = ItemPedidoSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return ItemPedidoSerializer
+        return ItemPedidoSerializer
 
 class PedidoViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
+
     def perform_create(self, serializer):
         usuario_id = self.request.data.get('usuario')
         pedido = serializer.save(usuario_id=usuario_id)
         return Response({
-        'id': pedido.id,
-        'numero_pedido': pedido.numero_pedido,
-    })
+            'id': pedido.id,
+            'numero_pedido': pedido.numero_pedido,
+        })
 
 class RecepcionPedidoViewSet(viewsets.ModelViewSet):
     queryset = RecepcionPedido.objects.all()

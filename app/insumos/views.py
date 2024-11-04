@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from .models import Proveedor,Insumo,ItemPedido,Pedido,RecepcionPedido
+from django.db.models import F
+from rest_framework.views import APIView
 from .serializer import  *
 
 
@@ -46,3 +48,15 @@ class RecepcionPedidoViewSet(viewsets.ModelViewSet):
     queryset = RecepcionPedido.objects.all()
     serializer_class = RecepcionPedidoSerializer
     permission_classes = [permissions.AllowAny]
+
+class ContadorDeInsumosView(APIView):
+    def get(self, request):
+        insumos = Insumo.objects.all()
+        return Response({'cantidad_insumos': insumos.count()})
+    
+class InsumosBajoStockAPIView(APIView):
+    def get(self, request):
+        insumos_bajo_stock = Insumo.objects.filter(stock_actual__lte=F('punto_pedido'))
+        serializer = InsumoSerializer(insumos_bajo_stock, many=True)
+        return Response(serializer.data)
+    

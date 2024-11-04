@@ -19,9 +19,9 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from app.insumos.views import InsumoViewSet,ProveedorViewSet,ItemPedidoViewSet,PedidoViewSet,RecepcionPedidoViewSet
-from app.productos.views import ProductoViewSet
-from app.ventas.views import ItemVentaViewSet,VentaViewSet, ClienteViewSet
+from app.insumos.views import InsumoViewSet,ProveedorViewSet,ItemPedidoViewSet,PedidoViewSet,RecepcionPedidoViewSet,ContadorDeInsumosView,InsumosBajoStockAPIView
+from app.productos.views import ProductoViewSet,ContadorDeProductos
+from app.ventas.views import ItemVentaViewSet,VentaViewSet, ClienteViewSet,ContadorDeVentasDelMes,ProductosMasVendidos
 from usuarios.views import UsuarioViewSet, CustomTokenObtainPairView, EmpleadoViewSet
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -45,5 +45,10 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/usuarios/', UsuarioViewSet.as_view({'get': 'list'})),
     path('api/usuarios/<int:pk>/', UsuarioViewSet.as_view({'get': 'retrieve'})),
+    path('contador-insumos/', ContadorDeInsumosView.as_view()),
+    path('contador-productos/', ContadorDeProductos.as_view()),
+    path('contador-ventas/', ContadorDeVentasDelMes.as_view()),
+    path('insumos-bajo-stock/', InsumosBajoStockAPIView.as_view()),
+    path('mas-vendidos/', ProductosMasVendidos.as_view()),
     path('',include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
